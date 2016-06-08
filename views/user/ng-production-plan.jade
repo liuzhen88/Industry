@@ -1,0 +1,427 @@
+extends user-layout
+
+block cust-css
+    link(rel='stylesheet', href='/css/jstree.style.css')
+    link(rel='stylesheet', href='/css/toastr.css')
+
+block content
+    if displayForm
+        .row.main
+            .col-md-7
+                .portlet.light.bordered
+                    .portlet-title
+                        .caption
+                            span.caption-subject.font-green-sharp.bold.uppercase= displayForm.name + " - 表单实例"
+                        .actions
+                            a.btn.btn-circle.btn-danger.refreshBtn(href="#")
+                                i.fa.fa-circle-o-notch &nbsp;更新
+                            a.btn.btn-circle.btn-danger.backBtn(href="#")
+                                i.fa.fa-undo &nbsp;撤销
+                            - if (displayForm.perms && displayForm.perms.approve)
+                              a.btn.btn-circle.btn-danger.submitBtn(href="#")
+                                i.fa.fa-arrow-circle-down &nbsp;审核并下发
+                    .portlet-body
+                        .dataTables_wrapper.no-footer
+                            table.table.table-striped.table-hover.table-bordered.dataTable.no-footer
+                                thead
+                                    tr(role="row")
+                                        th(tabindex="0",rowspan="1", colspan="1")
+                                        th(tabindex="0", rowspan="1", colspan="1") 产品编号
+                                        th(tabindex="0", rowspan="1", colspan="1") 绳规格-绳直径
+                                        th(tabindex="0", rowspan="1", colspan="1") 定制
+                                        th(tabindex="0", rowspan="1", colspan="1") 类别
+                                        th(tabindex="0", rowspan="1", colspan="1") 结构
+                                        th(tabindex="0", rowspan="1", colspan="1") 直径(mm)
+                                        th(tabindex="0", rowspan="1", colspan="1") 捻向
+                                        th(tabindex="0", rowspan="1", colspan="1") 强度(MPa)
+                                        th(tabindex="0", rowspan="1", colspan="1") 涂油方式
+                                        th(tabindex="0", rowspan="1", colspan="1") 捻距(mm)
+                                        th(tabindex="0", rowspan="1", colspan="1") 表面状态
+                                        th(tabindex="0", rowspan="1", colspan="1") 特殊要求
+                                        th(tabindex="0", rowspan="1", colspan="1") 用途
+                                        th(tabindex="0", rowspan="1", colspan="1") 交货日期
+                                        th(tabindex="0", rowspan="1", colspan="1") 车间
+                                        th(tabindex="0", rowspan="1", colspan="1") 合并
+                                        th(tabindex="0", rowspan="1", colspan="1") 状态
+            .col-md-5.form-card(id=displayForm._id)
+                .portlet.light.bordered
+                    .portlet-title
+                        .caption
+                            span.caption-subject.font-green-sharp.bold.uppercase= displayForm.name
+                            span.caption-helper
+                        .actions
+                            a.btn.btn-outline.btn-circle.expand.hidden(href="#")
+                               i.fa.fa-expand &nbsp;展开
+                            a.btn.btn-outline.btn-circle.compress.hidden(href="#")
+                               i.fa.fa-compress &nbsp;收起
+                    .portlet-body
+                        .tree-container
+                            .tree-actions.hidden
+                            .tree-body
+                    .portlet-footer
+                        .tree-header.form-inline.hidden
+                            .row
+                                .form-group.col-md-6
+                                    label 制表
+                                    input.form-control(type='text', name='author', disabled)
+                                .form-group.col-md-6
+                                    label 制表日期
+                                    input.form-control(type='text', name='created', disabled)
+                            .row
+                                .form-group.col-md-6
+                                    label 审核
+                                    input.form-control(type='text', name='auditor', disabled)
+                                .form-group.col-md-6
+                                    label 审核日期
+                                    input.form-control(type='text', name='audit_date', disabled)
+                            .row
+                                .portlet-actions.pull-right(style="margin-right:14px")
+                                    button.cancel.btn.btn-default 取消
+        .modal.refresh
+            .modal-dialog(style="width:70%")
+                form.form-horizontal(role="form")
+                    .modal-content
+                        .modal-header
+                            button.close(data-dismiss="modal")
+                            h4.modal-title 更新生产计划
+                        .modal-body(style="overflow:hidden")
+                            .portlet.box.yellow
+                                .portlet-title(style="min-height:0px")
+                                    .caption(style="font-size:14px;font-weight:bold;padding-top:8px;padding-bottom:8px")  生产计划更新前
+                                .portlet-body
+                                    .panel-group.accordion
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxq_gdcp",style="font-size:14px;font-weight:bold") 工段产品
+                                            .panel-collapse.collapse#gxq_gdcp
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxq_gdcp
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 类别
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 结构
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 直径(mm)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻向
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 强度(Mpa)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 涂油方式
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻距(mm)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 表面状态
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 特殊要求
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 用途
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxq_sxfs",style="font-size:14px;font-weight:bold") 收线方式
+                                            .panel-collapse.collapse#gxq_sxfs
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxq_sxfs
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 段长(m)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 段数
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 单件米长(m)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 件数
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 总米长(m)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 工字轮型号
+                            .portlet.box.yellow
+                                .portlet-title(style="min-height:0px")
+                                    .caption(style="font-size:14px;font-weight:bold;padding-top:8px;padding-bottom:8px") 生产计划更新后
+                                .portlet-body
+                                    .panel-group.accordion
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxh_ngqyl",style="font-size:14px;font-weight:bold") 捻股前用料
+                                            .panel-collapse.collapse#gxh_ngqyl
+                                                .panel-body
+                                                    .panel-group.accordion#gxh_ngqyl_accordion
+                                                        .panel.panel-default.gxh_ngqyl_xwx
+                                                            .panel-heading
+                                                                .panel-title(style="font-size:14px")
+                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                    href="#gxh_ngqyl_xwx",style="font-size:14px;font-weight:bold") 纤维芯
+                                                            .panel-collapse.collapse#gxh_ngqyl_xwx
+                                                                .panel-body
+                                                                    .panel-group.accordion
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_xwx_gg",style="font-size:14px;font-weight:bold") 规格
+                                                                            .panel-collapse.collapse#gxh_ngqyl_xwx_gg
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_xwx_gg
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 类别
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 直径(mm)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻向
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 含油率(%)
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_xwx_yl",style="font-size:14px;font-weight:bold") 用量
+                                                                            .panel-collapse.collapse#gxh_ngqyl_xwx_yl
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_xwx_yl
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 工艺米长系数
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 总米长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 吨耗(%)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 重量(kg)
+                                                        .panel.panel-default.gxh_ngqyl_yz
+                                                            .panel-heading
+                                                                .panel-title(style="font-size:14px")
+                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                    href="#gxh_ngqyl_yz",style="font-size:14px;font-weight:bold") 油脂
+                                                            .panel-collapse.collapse#gxh_ngqyl_yz
+                                                                .panel-body
+                                                                    .panel-group.accordion
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_yz_gg",style="font-size:14px;font-weight:bold") 规格
+                                                                            .panel-collapse.collapse#gxh_ngqyl_yz_gg
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_yz_gg
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 型号
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_yz_yl",style="font-size:14px;font-weight:bold") 用量
+                                                                            .panel-collapse.collapse#gxh_ngqyl_yz_yl
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_yz_yl
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 涂油方式
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 吨耗(%)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 重量(kg)
+                                                        .panel.panel-default.gxh_ngqyl_zxs
+                                                            .panel-heading
+                                                                .panel-title(style="font-size:14px")
+                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                    href="#gxh_ngqyl_zxs",style="font-size:14px;font-weight:bold") 中心丝
+                                                            .panel-collapse.collapse#gxh_ngqyl_zxs
+                                                                .panel-body
+                                                                    .panel-group.accordion
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_zxs_gg",style="font-size:14px;font-weight:bold") 规格
+                                                                            .panel-collapse.collapse#gxh_ngqyl_zxs_gg
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_zxs_gg
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 类别
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 直径(mm)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 强度(MPa)
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_zxs_yl",style="font-size:14px;font-weight:bold") 用量
+                                                                            .panel-collapse.collapse#gxh_ngqyl_zxs_yl
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_zxs_yl
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 段长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 段数
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 单件米长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 件数
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 总米长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 工字轮型号
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 操作
+                                                                                    .table-toolbar
+                                                                                        .row
+                                                                                            .col-md-1(style="float:right")
+                                                                                                .btn-group
+                                                                                                    button.btn.btn-sm.green.add(style="right:25px")
+                                                                                                        i.fa.fa-plus 添加
+                                                        .panel.panel-default.gxh_ngqyl_wgs
+                                                            .panel-heading
+                                                                .panel-title(style="font-size:14px")
+                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                    href="#gxh_ngqyl_wgs",style="font-size:14px;font-weight:bold") 外钢丝
+                                                            .panel-collapse.collapse#gxh_ngqyl_wgs
+                                                                .panel-body
+                                                                    .panel-group.accordion#gxh_ngqyl_wgs_accordion
+                                                        .panel.panel-default.gxh_ngqyl_zjp
+                                                            .panel-heading
+                                                                .panel-title(style="font-size:14px")
+                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                    href="#gxh_ngqyl_zjp",style="font-size:14px;font-weight:bold") 中间品
+                                                            .panel-collapse.collapse#gxh_ngqyl_zjp
+                                                                .panel-body
+                                                                    .panel-group.accordion
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_zjp_gg",style="font-size:14px;font-weight:bold") 规格
+                                                                            .panel-collapse.collapse#gxh_ngqyl_zjp_gg
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_zjp_gg
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 结构
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 直径(mm)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻向
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 强度(MPa)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 涂油方式
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻距(mm)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 表面状态
+                                                                        .panel.panel-default
+                                                                            .panel-heading
+                                                                                .panel-title(style="font-size:14px")
+                                                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                                                    href="#gxh_ngqyl_zjp_yl",style="font-size:14px;font-weight:bold") 用量
+                                                                            .panel-collapse.collapse#gxh_ngqyl_zjp_yl
+                                                                                .panel-body
+                                                                                    .dataTables_wrapper.no-footer
+                                                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_ngqyl_zjp_yl
+                                                                                            thead
+                                                                                                tr(role="row")
+                                                                                                    th(tabindex="0",rowspan="1", colspan="1") 段长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 段数
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 单件米长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 件数
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 总米长(m)
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 工字轮型号
+                                                                                                    th(tabindex="0", rowspan="1", colspan="1") 操作
+                                                                                    .table-toolbar
+                                                                                        .row
+                                                                                            .col-md-1(style="float:right")
+                                                                                                .btn-group
+                                                                                                    button.btn.btn-sm.green.add(style="right:25px")
+                                                                                                        i.fa.fa-plus 添加
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxh_gdcp",style="font-size:14px;font-weight:bold") 工段产品
+                                            .panel-collapse.collapse#gxh_gdcp
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_gdcp
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0",rowspan="1", colspan="1") 类别
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 结构
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 直径(mm)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻向
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 强度(MPa)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 涂油方式
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 捻距(mm)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 表面状态
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 特殊要求
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 用途
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxh_sxfs",style="font-size:14px;font-weight:bold") 收线方式
+                                            .panel-collapse.collapse#gxh_sxfs
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_sxfs
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0",rowspan="1", colspan="1") 段长(m)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 段数
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 单件米长(m)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 件数
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 总米长(m)
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 工字轮型号
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 操作
+                                                    .table-toolbar
+                                                        .row
+                                                            .col-md-1(style="float:right")
+                                                                .btn-group
+                                                                    button.btn.btn-sm.green.add(style="right:20px")
+                                                                        i.fa.fa-plus 添加
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxh_jdjh",style="font-size:14px;font-weight:bold") 进度计划
+                                            .panel-collapse.collapse#gxh_jdjh
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_jdjh(style="width:500px")
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 计划生产开始日期
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 计划生产结束日期
+                                                            tbody
+                                                                tr
+                                                                    td
+                                                                        input.form-control.input-sm(name="jhscksrq" type='text')
+                                                                    td
+                                                                        input.form-control.input-sm(name="jhscjsrq" type='text')
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxh_cljh",style="font-size:14px;font-weight:bold") 产量计划
+                                            .panel-collapse.collapse#gxh_cljh
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_cljh(style="width:250px")
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 计划产量(m)
+                                                            tbody
+                                                                tr
+                                                                    td
+                                                                        input.form-control.input-sm(name="jhcl" type='text' disabled)
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .panel-title(style="font-size:14px")
+                                                    a.accordion-toggle.accordion-toggle-styled.collapsed(data-toggle="collapse"
+                                                    href="#gxh_cj",style="font-size:14px;font-weight:bold") 车间
+                                            .panel-collapse.collapse#gxh_cj
+                                                .panel-body
+                                                    .dataTables_wrapper.no-footer
+                                                        table.table.table-striped.table-hover.table-bordered.dataTable.no-footer.gxh_cj(style="width:250px")
+                                                            thead
+                                                                tr(role="row")
+                                                                    th(tabindex="0", rowspan="1", colspan="1") 选择车间
+                                                            tbody
+                                                                tr
+                                                                    td
+                                                                      select.form-control(name='sel-cj')
+                            .error
+                        .modal-footer
+                            button#cancel.btn.btn-default(data-dismiss="modal") 取消
+                            button#submit.btn.btn-primary 保存
+    else
+        .note.note-info
+            h4.block 您没有任何授权的表单。
+
+block cust-js
+    script(src='/js/vendor/jstree.js')
+    script(src='/js/vendor/toastr.min.js')
+    script(src='/js/user/ng-production-plan.js')

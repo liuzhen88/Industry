@@ -1,0 +1,57 @@
+extends user-layout
+block cust-css
+    link(rel='stylesheet', href='/css/jstree.style.css')
+    link(rel='stylesheet', href='/css/toastr.css')
+block content
+    input(type="hidden",value=displayForm._id,id="formId")
+    .row
+        .col-md-12.column
+            .portlet.green-meadow.box
+                .portlet-title
+                    .caption
+                        i.fa.fa-cube
+                        span.caption-subject.hold.uppercase
+                            strong=displayForm.name
+                        span
+                            small -总览
+                    .tools
+                        a(href="#").collapse
+                .portlet-body
+                    .row.ui-sortable
+                        .col-md-12.column
+                            .portlet.box.green-meadow
+                                .portlet-title
+                                    .caption
+                                        | 1.
+                                        span.caption-subject.hold.uppercase
+                                            strong=displayForm.name
+                                        span
+                                            small -主料汇总
+                                    .tools
+                                        a(href="#").collapse
+                                #zl.portlet-body
+                    .row.ui-sortable
+                        .col-md-12.column
+                            .portlet.green-meadow.box
+                                .portlet-title
+                                    .caption
+                                        | 2.
+                                        span.caption-subject.hold.uppercase
+                                            strong=displayForm.name
+                                        span
+                                            small -辅料汇总
+                                    .tools
+                                        a(href="#").collapse
+                                #fl.portlet-body
+            #modal
+block cust-js
+    script(src='/js/vendor/jstree.js')
+    script(src='/js/vendor/toastr.min.js')
+    script(src='/js/vendor/bootstrap-datetimepicker2.js')
+    script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js')
+    script(src='/js/vendor/plugins/select2/select2.js')
+    script(src='/js/vendor/portlet-draggable.js')
+    script(src='/js/vendor/jquery.slimscroll.min.js')
+    script(src='/js/vendor/jquery.ui.touch-punch.min.js')
+    script(src='/js/vendor/jquery-ui-1.10.3.custom.min.js')
+    script(src='/js/user/bom.js')

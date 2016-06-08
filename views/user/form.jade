@@ -1,0 +1,67 @@
+extends user-layout
+
+block cust-css
+  link(rel='stylesheet', href='/css/jstree.style.css')
+  link(rel='stylesheet', href='/css/toastr.css')
+
+block content
+  if displayForm
+    .row.general-action(class=displayForm.perms ? "hidden" : "")
+      .col-md-6
+        .well
+          .col-md-8
+            input.form-control.mach-no(type="text")
+          .col-md-4
+            button.btn.btn-primary.scan 扫描机台选择工单
+          .clearfix
+      .col-md-6
+        .well.action-right.hidden
+    .row
+      .col-md-6
+        .portlet.light.bordered
+          .portlet-title
+            .caption
+              span.caption-subject.font-green-sharp.bold.uppercase= displayForm.name + " - 表单实例"
+            .actions
+              a.btn.btn-circle.btn-danger.submitBtn(href="#")
+                i.fa.fa-arrow-circle-up &nbsp;提交
+              - if (displayForm.perms && displayForm.perms.approve)
+                a.btn.btn-circle.btn-primary.verify.disabled(href="#")
+                  i.fa.fa-check 提交审核
+              - if (displayForm.root)
+                a.btn.btn-circle.btn-default.btn-sm.add(href="#")
+                  i.fa.fa-plus 添加
+          .portlet-body
+            .dataTables_wrapper.no-footer
+              table.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                thead
+                  tr(role="row")
+                    th.sorting_asc(tabindex="0", width="2%", rowspan="1", colspan="1") #
+                    th.sorting(tabindex="0", rowspan="1", colspan="1")
+                    th.sorting(tabindex="0", rowspan="1", colspan="1")
+                    th.sorting(tabindex="0", rowspan="1", colspan="1")
+                    th.sorting(tabindex="0", rowspan="1", colspan="1")
+                    th.sorting(tabindex="0", rowspan="1", colspan="1")
+                    th.sorting.form-status(tabindex="0", width="30px" rowspan="1", colspan="1") 状态
+
+      .col-md-6.form-card(id=displayForm._id)
+        .portlet.light.bordered
+          .portlet-title
+            .caption
+              span.caption-subject.font-green-sharp.bold.uppercase= displayForm.name
+              span.caption-helper
+            .actions
+              a.btn.btn-circle.btn-icon-only.btn-default.fullscreen(href="#")
+          .portlet-body
+            .tree-container
+              .tree-actions.hidden
+              .tree-header.form-inline
+              .tree-body
+  else
+    .note.note-info
+      h4.block 您没有任何授权的表单。
+
+block cust-js
+  script(src='/js/vendor/jstree.js')
+  script(src='/js/vendor/toastr.min.js')
+  script(src='/js/user/form.js')

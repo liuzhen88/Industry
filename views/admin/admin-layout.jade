@@ -1,0 +1,143 @@
+extends layout
+
+block sidebar-menu
+  li.sidebar-search-wrapper(style="height: 60px;")
+  li.start(class=selected == 'user' ? "active" : "")
+    a(href="./home")
+      i.icon-user
+      span.title 人员管理
+      if (selected === "user")
+        span.selected
+  li(class=selected == 'form' ? "active" : "")
+    a(href="./form")
+      i.icon-docs
+      span.title 表单管理
+      if (selected === "form")
+        span.selected
+  li(class=selected == 'perm' ? "active" : "")
+    a(href="perm")
+      i.icon-lock
+      span.title 用户权限管理
+      if (selected === "perm")
+        span.selected
+  li(class=(selected == 'sxhptk'|| selected == 'plk' ||
+  selected == 'thlk' || selected == 'cpsk' || selected == 'gk'|| selected == 'jtb' ||selected == 'yggzztb'|| selected == 'jsxjgb'|| selected == 'bjsxjgb'|| selected == 'gssjgb'||selected == 'gdzzhysb'||selected == 'gybzg' ||selected == 'gybjsx'  ) ? "active open" : "")
+    a
+      i.icon-lock
+      span.title 内部表管理
+      span.arrow
+    ul.sub-menu
+      //li(class=(selected == 'sxhptk'|| selected == 'plk' ||
+      //selected == 'thlk' || selected == 'cpsk' || selected == 'gk')? "active open" : "")
+      //  a
+      //    i.icon-lock
+      //    span.title 虚拟库存表
+      //    span.arrow
+      //  ul.sub-menu
+      //    li(class=selected == 'sxhptk' ? "active" : "")
+      //      a(href="internalForm?subForm=sxhptk")
+      //        i.icon-lock
+      //        span.title 酸洗后盘条库
+      //        if (selected === "sxhptk")
+      //          span.selected
+      //    li(class=selected == 'plk' ? "active" : "")
+      //      a(href="internalForm?subForm=plk")
+      //        i.icon-lock
+      //        span.title 坯料库
+      //        if (selected === "plk")
+      //          span.selected
+      //    li(class=selected == 'thlk' ? "active" : "")
+      //      a(href="internalForm?subForm=thlk")
+      //        i.icon-lock
+      //        span.title 退火料库
+      //        if (selected === "thlk")
+      //          span.selected
+      //    li(class=selected == 'cpsk' ? "active" : "")
+      //      a(href="internalForm?subForm=cpsk")
+      //        i.icon-lock
+      //        span.title 成品丝库
+      //        if (selected === "cpsk")
+      //          span.selected
+      //    li(class=selected == 'gk' ? "active" : "")
+      //      a(href="internalForm?subForm=gk")
+      //        i.icon-lock
+      //        span.title 股库
+      //        if (selected === "gk")
+      //          span.selected
+
+      li(class=selected == 'jtb' ? "active" : "")
+        a(href="internalForm?subForm=jtb")
+          i.icon-lock
+          span.title 机台表
+          if (selected === "jtb")
+            span.selected
+      li(class=selected == 'yggzztb' ? "active" : "")
+        a(href="internalForm?subForm=yggzztb")
+          i.icon-lock
+          span.title 员工工作状态表
+          if (selected === "yggzztb")
+            span.selected
+      li(class=(selected == 'gssjgb'|| selected == 'jsxjgb' || selected == 'bjsxjgb' )? "active open" : "")
+        a
+          i.icon-lock
+          span.title 钢丝绳结构层次表
+          span.arrow
+        ul.sub-menu
+          li(class=selected == 'gssjgb' ? "active" : "")
+            a(href="internalForm?subForm=gssjgb")
+              i.icon-lock
+              span.title 钢丝绳结构表
+              if (selected === "gssjgb")
+                span.selected
+          li(class=selected == 'gujgb' ? "active" : "")
+            a(href="internalForm?subForm=gujgb")
+              i.icon-lock
+              span.title 股结构表
+              if (selected === "gujgb")
+                span.selected
+          li(class=selected == 'jsxjgb' ? "active" : "")
+            a(href="internalForm?subForm=jsxjgb")
+              i.icon-lock
+              span.title 金属芯结构表
+              if (selected === "jsxjgb")
+                span.selected
+          li(class=selected == 'bjsxjgb' ? "active" : "")
+            a(href="internalForm?subForm=bjsxjgb")
+              i.icon-lock
+              span.title 半金属芯结构表
+              if (selected === "bjsxjgb")
+                span.selected
+      li(class=(selected == 'gybzg' || selected == 'gybjsx') ? "active open" : "")
+        a
+          i.icon-lock
+          span.title 工艺表
+          span.arrow
+        ul.sub-menu
+          li(class=selected == 'gybzg' ? "active" : "")
+            a(href="internalForm?subForm=gybzg")
+              i.icon-lock
+              span.title 工艺表主股
+              if (selected === "gybzg")
+                span.selected
+          li(class=selected == 'gybjsx' ? "active" : "")
+            a(href="internalForm?subForm=gybjsx")
+              i.icon-lock
+              span.title 工艺表金属芯
+              if (selected === "gybjsx")
+                span.selected
+      li(class=selected == 'gdzzhysb' ? "active" : "")
+        a(href="internalForm?subForm=gdzzhysb")
+          i.icon-lock
+          span.title 工段制造号映射表
+          if (selected === "gdzzhysb")
+            span.selected
+block cust-js
+  script.
+    $("#tab-list").DataTable({
+      "paging": false,
+      "searching": false,
+      "info": false,
+      "language": {
+        "emptyTable": "目前表内没有数据"
+      }
+    });

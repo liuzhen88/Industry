@@ -1,0 +1,131 @@
+extends admin-layout
+block cust-css
+    link(rel='stylesheet', href='/css/bootstrap-datetimepicker2.css')
+    link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+block content
+    h3.page-title 机台表管理
+    .row
+    .col-md-12
+        .portlet
+            .portlet-title
+                .caption
+                    i.fa.fa-user
+                    | 现有机台列表
+                .actions
+                    a.btn-new.btn.default.yellow-stripe(href="#")
+                        i.fa.fa-plus
+                        span.hidden-480 &nbsp;新机台
+            .portlet-body
+                .dataTables_wrapper.no-footer
+                    table#tab.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                        thead
+                            tr(role="row")
+                                th #
+                                th 机台号
+                                th 设备型号
+                                th 设备参数
+                                th 标准产能
+                                th 当前状态
+                                th 开机率
+                                th 实际产能
+                                th 实际标准产能
+                                th 长度误差率
+                                th 塔轮使用周期
+                                th 总故障时间
+                                th 故障次数
+                                th 总维修时间
+                                th 捻缩率
+                                th 厂家
+                                th 启用日期
+                                th 安装位置
+                                th 操作
+        .modal.new
+            .modal-dialog
+                form.form-horizontal(method="POST", action="internalForm/create?subForm=jtb", role="form")
+                    .modal-content
+                        .modal-header
+                            h4.modal-title 新机台
+                        .modal-body
+                            .form-group
+                                .col-md-3
+                                    label.control-label 机台号
+                                    input.form-control(name="device_num", type="text")
+                                .col-md-3
+                                    label.control-label 设备型号
+                                    input.form-control(name="device_model", type="text")
+                                .col-md-3
+                                    label.control-label 设备参数
+                                    input.form-control(name="device_params", type="text")
+                                .col-md-3
+                                    label.control-label 标准产能
+                                    input.form-control(name="std_capacity", type="text")
+                            .form-group
+                                .col-md-9
+                                    label.control-label 当前状态
+                                    .radio-list
+                                        label.radio-inline
+                                            input(type="radio", name="status", value="运行")
+                                            | 运行
+                                        label.radio-inline
+                                            input(type="radio", name="status", value="空闲")
+                                            | 空闲
+                                        label.radio-inline
+                                            input(type="radio", name="status", value="故障")
+                                            | 故障
+                                        label.radio-inline
+                                            input(type="radio", name="status", value="维修")
+                                            | 维修
+                                        label.radio-inline
+                                            input(type="radio", name="status", value="保养")
+                                            | 保养
+                                .col-md-3
+                                    label.control-label 开机率
+                                    input.form-control(name="operating_rate", type="text")
+                            .form-group
+                                .col-md-3
+                                    label.control-label 实际产能
+                                    input.form-control(name="fact_capacity", type="text")
+                                .col-md-3
+                                    label.control-label 实际标准产能
+                                    input.form-control(name="fact_std_capacity", type="text")
+                                .col-md-3
+                                    label.control-label 长度误差率
+                                    input.form-control(name="length_error_rate", type="text")
+                                .col-md-3
+                                    label.control-label 塔轮使用周期
+                                    input.form-control(name="cone_use_cycle", type="text")
+                            .form-group
+                                .col-md-3
+                                    label.control-label 总故障时间
+                                    input.form-control(name="total_down_time", type="text",date="true")
+                                .col-md-3
+                                    label.control-label 故障次数
+                                    input.form-control(name="down_count", type="text")
+                                .col-md-3
+                                    label.control-label 总维修时间
+                                    input.form-control(name="total_repair_time", type="text",date="true")
+                                .col-md-3
+                                    label.control-label 捻缩率
+                                    input.form-control(name="twist_contraction_rate", type="text")
+                            .form-group
+                                .col-md-6
+                                    label.control-label 厂家
+                                    input.form-control(name="vender", type="text")
+                                .col-md-6
+                                    label.control-label 启用日期
+                                    input.form-control(name="opened_time", type="text",date="true")
+                            .form-group
+                                .col-md-12
+                                    label.control-label 安装位置
+                                    textarea.form-control(name="installation_site", row="3")
+                        .modal-footer
+                            button.btn.btn-default(type="button",id="cancel", data-dismiss="modal") 取消
+                            button.save.btn.btn-primary(type="submit",id="submit") 保存
+                            button.save.btn.yellow(type="button",id="update") 修改
+                            button.btn.red(id="delete" style="position:absolute;left:10px;bottom:15px;background-color:rgb(245,128,128);") 删除
+block page-js
+    script(src='/js/vendor/bootstrap-datetimepicker2.js')
+    script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js')
+    script(src='/js/vendor/plugins/select2/select2.js')
+    script(src="/js/admin/jtb.js")
+                                                           

@@ -1,0 +1,106 @@
+doctype html
+html
+  head
+    title inKanban - 易恒智行
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/font-awesome.css')
+    link(rel='stylesheet', href='/css/simple-line-icons.min.css')
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/formValidation.css')
+    link(rel='stylesheet', href='/css/components.css')
+    link(rel='stylesheet', href='/css/plugins.css')
+    link(rel='stylesheet', href='/css/user-layout.css')
+    link(rel='stylesheet', href='/css/light.css')
+    link(rel='stylesheet', href='/css/dataTables.bootstrap.css')
+    link(rel='stylesheet', href='/css/user.css')
+    link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+    link(rel='stylesheet', href='/css/plugins.css')
+    link(rel='stylesheet', href='/css/bootstrap-datetimepicker2.css')
+    link(rel='stylesheet', href='/css/toastr.css')
+    link(rel='stylesheet', href='/css/jquery-ui.min.css')
+
+    block cust-css
+
+  body.page-header-fixed.page-sidebar-closed-hide-logo.page-sidebar-closed-hide-logo
+    .page-header.navbar.navbar-fixed-top
+      .page-header-inner
+        .page-logo
+          a(href="#")
+            img.logo-default(src="/image/logo-user.png")
+          .menu-toggler.sidebar-toggler
+        a.menu-toggler.responsive-toggler(href="javascript:;", data-toggle="collapse", data-target=".navbar-collapse")
+        .page-top
+          .top-menu
+            if user
+              ul.nav.navbar-nav.pull-right
+                li.dropdown.dropdown-user
+                  a.dropdown-toggle(href="#", data-toggle="dropdown", data-hover="dropdown", data-close-others="true")
+                    span.username.username-hide-on-mobile= user.name
+                    i.fa.fa-angle-down
+                  ul.dropdown-menu.dropdown-menu-default
+                    li
+                      a.logout(href="#") 退出
+    .clearfix
+    .page-container
+      if forms
+        .page-sidebar-wrapper
+          .page-sidebar.navbar-collapse.collapse
+            ul.page-sidebar-menu(data-keep-expanded="false", data-auto-scroll="true", data-slide-speed="200")
+              - for (var i = 0; i < forms.length; i++)
+                - if (forms[i].children)
+                  li(class=(forms[i].active ? 'active open' : ''))
+                    a(href="javascript:;")
+                      i.icon-docs
+                      span.title= forms[i].name
+                      span.arrow(class=(forms[i].active ? 'open' : ''))
+                    ul.sub-menu(style=(forms[i].active ? "display: block;" : ""))
+                      - for (var j = 0; j < forms[i].children.length; j++)
+                        li(class=(forms[i].children[j].active ? 'active' : ''))
+                          a(href="home?type=" + (forms[i].children[j].category.name === 'module' ? forms[i].children[j].alias: forms[i].children[j].category.name)  + "&id=" + forms[i].children[j]._id)
+                            i.icon-docs
+                            | #{forms[i].children[j].name}
+                 - else
+                  li(class=(forms[i].active ? 'active' : ''))
+                    a(href="home?type=" + (forms[i].category.name === 'module' ? forms[i].alias : forms[i].category.name) + "&id=" + forms[i]._id)
+                      i.icon-docs
+                      span.title= forms[i].name
+      .page-content-wrapper
+        .page-content
+          block content
+    .page-footer
+      .page-footer-inner.container-fluid.container-lf-space
+        p.page-footer-copyright 苏州易恒智行信息科技有限公司 版权所有 @ 2016-2026
+         br
+         a(href="http://www.miitbeian.gov.cn",target="_blank") 苏ICP备15045723号
+         span @ 2016-2026 INKANBAN.CN ALL RIGHTS RESERVED.
+    #error-alert.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h4.modal-title 错误
+          .modal-body
+            p.error-message
+          .modal-footer
+            button#alert-ok.btn.btn-primary(type="button", data-dismiss="modal") 确定
+
+    script(src='/js/vendor/jquery-1.11.3.js')
+    script(src='/js/vendor/jquery-ui-1.10.3.custom.min.js')
+    script(src='/js/vendor/bootstrap.js')
+    script(src='/js/vendor/formValidation.popular.js')
+    script(src='/js/vendor/fv-bootstrap.js')
+    script(src='/js/vendor/moment-with-locales.min.js')
+    script(src='/js/vendor/user-metronic.js')
+    script(src='/js/vendor/user-layout.js')
+    script(src="/js/vendor/jquery.dataTables.min.js")
+    script(src="/js/vendor/dataTables.bootstrap.js")
+    script(src="/js/vendor/bootbox.js")
+    script(src="/js/vendor/socket.io.js")
+    script(src='/js/vendor/bootstrap-datetimepicker2.js')
+    script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js',charset="UTF-8")
+    script(src='/js/mes-util.js')
+    script(src='/js/vendor/toastr.min.js')
+    script(src='/js/vendor/plugins/select2/select2.min.js')
+    script(src='/js/vendor/plugins/select2/select2_locale_zh-CN.js')
+    script(src='/js/vendor/jquery.jqprint-0.3.js')
+    script(src="/js/vendor/jquery-migrate-1.1.0.js")
+    block cust-js

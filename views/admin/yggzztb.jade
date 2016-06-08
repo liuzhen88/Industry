@@ -1,0 +1,79 @@
+extends admin-layout
+block cust-css
+    link(rel='stylesheet', href='/css/bootstrap-datetimepicker2.css')
+    link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+block content
+    h3.page-title 员工工作状态记录表管理
+    .row
+    .col-md-12
+        .portlet
+            .portlet-title
+                .caption
+                    i.fa.fa-user
+                    | 现有员工工作状态记录列表
+                .actions
+                    a.btn-new.btn.default.yellow-stripe(href="#")
+                        i.fa.fa-plus
+                        span.hidden-480 &nbsp;新员工工作状态记录
+            .portlet-body
+                .dataTables_wrapper.no-footer
+                    table#tab.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                        thead
+                            tr(role="row")
+                                th #
+                                th 姓名
+                                th 编号
+                                th 所属车间/班组
+                                th 班产量
+                                th 总产量
+                                th 不良品率
+                                th 开机率
+                                th 调产耗时
+                                th 操作
+        .modal.new
+            .modal-dialog
+                form.form-horizontal(method="POST", action="internalForm/add?subForm=yggzztb", role="form")
+                    .modal-content
+                        .modal-header
+                            h4.modal-title 新员工工作状态记录
+                        .modal-body
+                            .form-group
+                                .col-md-12
+                                    label.control-label 姓名
+                                    input.form-control(name="name", type="text")
+                            .form-group
+                                .col-md-12
+                                    label.control-label 编号
+                                    input.form-control(name="num", type="text")
+                            .form-group
+                                .col-md-6
+                                    label.control-label 所属车间/班组
+                                    input.form-control(name="org", type="text")
+                                .col-md-6
+                                    label.control-label 班产量
+                                    input.form-control(name="team_output", type="text")
+                            .form-group
+                                .col-md-6
+                                    label.control-label 总产量
+                                    input.form-control(name="total_output", type="text")
+                                .col-md-6
+                                    label.control-label 不良品率
+                                    input.form-control(name="bad_product_rate", type="text")
+                            .form-group
+                                .col-md-6
+                                    label.control-label 开机率
+                                    input.form-control(name="operating_rate", type="text")
+                                .col-md-6
+                                    label.control-label 调产耗时
+                                    input.form-control(name="adj_pro_time", type="text")
+                        .modal-footer
+                            button.btn.btn-default(type="button",id="cancel", data-dismiss="modal") 取消
+                            button.save.btn.btn-primary(type="submit",id="submit") 保存
+                            button.save.btn.yellow(type="button",id="update") 修改
+                            button.btn.red(id="delete" style="position:absolute;left:10px;bottom:15px;background-color:rgb(245,128,128);") 删除
+block page-js
+    script(src='/js/vendor/bootstrap-datetimepicker2.js')
+    script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js')
+    script(src='/js/vendor/plugins/select2/select2.js')
+    script(src="/js/admin/yggzztb.js")
+                

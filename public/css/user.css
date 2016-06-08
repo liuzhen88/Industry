@@ -1,0 +1,174 @@
+.page-header .page-logo .logo-default {
+    width: 120px;
+}
+
+.btn-circle {
+    margin-left: 5px;
+}
+
+.tree-container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.jstree-inp {
+    width: 150px;
+    height: 22px;
+    line-height: 22px;
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: none;
+    color: #333333;
+}
+
+.jstree-inp-sm {
+    width: 80px;
+    height: 22px;
+    line-height: 22px;
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: none;
+    color: #333333;
+}
+.jstree-inp:focus,.jstree-inp-sm:focus {
+    outline: 0;
+    border: 1px solid #4b8df9;
+}
+
+.portlet-actions {
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+.param-tree {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.cancel {
+    margin-right: 5px;
+}
+
+/** DataTable styles **/
+table.dataTable tbody tr.selected {
+    background-color: #8fe0fd;
+}
+
+table.dataTable > thead > tr > th {
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: 1px solid #ddd !important;
+}
+
+table.dataTable > tbody > tr > td {
+    border-top: 0 !important;
+}
+
+table.dataTable > tbody > tr.selected {
+    background-color: #cacaca;
+}
+/** End of DataTable styles **/
+
+
+.caption-helper {
+    margin-left: 5px !important;
+}
+
+.jstree-inp[disabled],.jstree-inp-sm[disabled] {
+    cursor: not-allowed;
+    background-color: #eeeeee;
+    opacity: 1;
+}
+
+.work-order.tree-header {
+    margin-bottom: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.tree-header {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.tree-header input {
+    width: 100% !important;
+}
+
+.tree-header label {
+    font-weight: 200;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+
+.tree-header .form-group {
+    margin-bottom: 5px;
+}
+
+.tree-actions {
+    margin-bottom: 25px;
+    margin-top: -10px;
+}
+
+.tree-actions label {
+    line-height: 34px;
+}
+
+.operations > div {
+    text-align: center;
+}
+
+.operations button {
+    width: 80px;
+}
+
+.page-content-wrapper .page-content {
+    padding-top: 0px !important;
+}
+
+.full-button {
+    width: 100%;
+}
+
+.action-right .col-md-3 button {
+    width: 100%;
+}
+
+.page-footer-inner {
+    width: 100%;
+    text-align: center;
+}
+
+.build-number {
+    font-width: 300;
+    margin-left: 20px;
+}
+
+.detail-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+}
+
+.assign-hscs li.borderless {
+    border: 0 none;
+}
+
+.assign-hscs li.borderless label:nth-child(1) {
+    margin-left: 20px;
+}
+
+@media (max-width: 767px) {
+    .well {
+        padding-top: 20px;
+        padding-bottom: 0px;
+    }
+}

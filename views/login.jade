@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    title inKanban - 易恒智行
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/bootstrap-datetimepicker.css')
+    link(rel='stylesheet', href='/css/font-awesome.css')
+    link(rel='stylesheet', href='/css/simple-line-icons.min.css')
+    link(rel='stylesheet', href='/css/login.css')
+    link(rel='stylesheet', href='/css/formValidation.css')
+    link(rel='stylesheet', href='/css/components.css')
+    link(rel='stylesheet', href='/css/plugins.css')
+    link(rel='stylesheet', href='/css/layout.css')
+    link(rel='stylesheet', href='/css/default.css')
+
+  body.login
+    .logo
+      a(href="/")
+        img(src="/image/logo.png", width="130px")
+    .content
+      form#login-form(action="login", method="POST", novalidate="novalidate")
+        h3.form-title 用户登录
+        .alert.alert-danger.display-hide
+          button.close(data-close="alert")
+          span.message
+        .form-group
+          label.control-label.visible-ie8.visible-ie9 用户名
+          .input-icon
+            i.fa.fa-user
+            input.form-control.placeholder-no-fix(type="text", autocomplete="off", placeholder="用户名", name="username")
+        #password-fg.form-group.display-hide
+          label.control-label.visible-ie8.visible-ie9 密码
+          .input-icon
+            i.fa.fa-lock
+            input.form-control.placeholder-no-fix(type="password", autocomplete="off", placeholder="密码", name="password")
+        .form-actions
+          button.btn.green-haze.pull-right(type="submit") 登录&nbsp;
+            i.m-icon-swapright.m-icon-white
+    .copyright 2015 @ 易恒智行
+    script(src='/js/vendor/jquery-1.11.3.js')
+    script(src='/js/vendor/bootstrap.js')
+    script(src='/js/vendor/moment-with-locales.min.js')
+    script(src='/js/vendor/formValidation.popular.js')
+    script(src='/js/vendor/fv-bootstrap.js')
+    script(src='/js/vendor/zh_CN.js')
+    script(src='/js/vendor/metronic.js')
+    script(src='/js/vendor/layout.js')
+    script(src='/js/mes-util.js')
+    script(src='/js/login.js')
+    script.
+      $(function() {
+        Login.init();
+      });

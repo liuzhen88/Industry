@@ -1,0 +1,180 @@
+extends admin-layout
+block cust-css
+    link(rel='stylesheet', href='/css/bootstrap-datetimepicker2.css')
+    link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+    link(rel='stylesheet', href='/js/vendor/plugins/jquery-file-upload/css/jquery.fileupload.css')
+    link(rel='stylesheet', href='/js/vendor/plugins/jquery-file-upload/css/jquery.fileupload-ui.css')
+    style
+        | .table > thead > tr > th{text-align:center;vertical-align:middle;border:1px solid #dddddd}
+block content
+    h3.page-title 工艺金属芯表管理
+    .row
+    .col-md-12
+        .portlet
+            .portlet-title
+                .caption
+                    i.fa.fa-user
+                    | 现有工艺金属芯列表
+                .actions
+                    a#downloadBtn.btn.default.yellow-stripe(href="internalForm/downloadGybjsx")
+                        i.fa.fa-download
+                        span.hidden-480 &nbsp;下载Excel
+                    a#uploadBtn.btn.default.yellow-stripe(href="#")
+                        i.fa.fa-upload
+                        span.hidden-480 &nbsp;上传Excel
+                    a.btn-new.btn.default.yellow-stripe(href="#",onclick="$('form').submit()")
+                        i.fa.fa-plus
+                        span.hidden-480 &nbsp;新的工艺表
+            .portlet-body
+                .dataTables_wrapper.no-footer
+                    table#tab.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                        thead
+                            tr
+                                th(rowspan=3) #
+                                th(rowspan=3) 金属绳芯结构
+                                th(colspan=2) 金属绳芯
+                                th(colspan=7) 金属芯外股
+                                th(colspan=7) 中心股
+                                th(rowspan=3) 操作
+                            tr
+                                th(rowspan=2) 金属绳芯直径
+                                th(rowspan=2) 金属绳芯捻距
+                                th(rowspan=2) 外股股数
+                                th(rowspan=2) 外股股径
+                                th(rowspan=2) 外股股捻距
+                                th(colspan=2) 外股钢丝直径
+                                th(colspan=2) 外股钢丝根数
+                                th(rowspan=2) 中心股股数
+                                th(rowspan=2) 中心股股径
+                                th(rowspan=2) 中心股股捻距
+                                th(colspan=2) 中心股钢丝直径
+                                th(colspan=2) 中心股钢丝根数
+                            tr(role="row")
+                                th 中心丝
+                                th 外层丝
+                                th 中心丝
+                                th 外层丝
+                                th 中心丝
+                                th 外层丝
+                                th 中心丝
+                                th 外层丝
+    .modal.new
+        .modal-dialog
+            form#dataForm.form-horizontal(method="POST", action="internalForm/add?subForm=gybjsx", role="form")
+                .modal-content
+                    .modal-header
+                        h4.modal-title 新工艺金属芯表
+                    .modal-body
+                        .form-group
+                            .col-md-4
+                                label.control-label 金属绳芯结构
+                                input.form-control(name="jssxjg", type="text")
+                            .col-md-4
+                                label.control-label 金属绳芯直径
+                                input.form-control(name="jssxzj", type="text")
+                            .col-md-4
+                                label.control-label 金属绳芯捻距
+                                input.form-control(name="jssxnj", type="text")
+                        .form-group
+                            .col-md-12
+                                label.control-label 金属芯外股 ↓
+                        .form-group
+                            .col-md-4
+                                label.control-label 外股股数
+                                input.form-control(name="wggs", type="text")
+                            .col-md-4
+                                label.control-label 外股股径
+                                input.form-control(name="wggj", type="text")
+                            .col-md-4
+                                label.control-label 外股股捻距
+                                input.form-control(name="wggnj", type="text")
+                        .form-group
+                            .col-md-12
+                                label.control-label 外股钢丝直径 ↓
+                        .form-group
+                            .col-md-6
+                                label.control-label 中心丝
+                                input.form-control(name="wggszj_zxs", type="text")
+                            .col-md-6
+                                label.control-label 外层丝
+                                input.form-control(name="wggszj_wcs", type="text")
+
+                        .form-group
+                            .col-md-12
+                                label.control-label 外股钢丝根数 ↓
+                        .form-group
+                            .col-md-6
+                                label.control-label 中心丝
+                                input.form-control(name="wggsgs_zxs", type="text")
+                            .col-md-6
+                                label.control-label 外层丝
+                                input.form-control(name="wggsgs_wcs", type="text")
+
+                        .form-group
+                            .col-md-12
+                                label.control-label 中心股 ↓
+                        .form-group
+                            .col-md-4
+                                label.control-label 中心股股数
+                                input.form-control(name="zxggs", type="text")
+                            .col-md-4
+                                label.control-label 中心股股径
+                                input.form-control(name="zxggj", type="text")
+                            .col-md-4
+                                label.control-label 中心股股捻距
+                                input.form-control(name="zxggnj", type="text")
+                        .form-group
+                            .col-md-12
+                                label.control-label 中心股钢丝直径 ↓
+                        .form-group
+                            .col-md-6
+                                label.control-label 中心丝
+                                input.form-control(name="zxgszj_zxs", type="text")
+                            .col-md-6
+                                label.control-label 外层丝
+                                input.form-control(name="zxgszj_wcs", type="text")
+                        .form-group
+                            .col-md-12
+                                label.control-label 中心股钢丝根数 ↓
+                            .col-md-6
+                                label.control-label 中心丝
+                                input.form-control(name="zxgsgs_zxs", type="text")
+                            .col-md-6
+                                label.control-label 外层丝
+                                input.form-control(name="zxgsgs_wcs", type="text")
+                    .modal-footer
+                        button.btn.btn-default(type="button",id="cancel", data-dismiss="modal") 取消
+                        button.save.btn.btn-primary(type="submit",id="submit") 保存
+                        button.save.btn.yellow(type="button",id="update") 修改
+                        button.btn.red(id="delete" style="position:absolute;left:10px;bottom:15px;background-color:rgb(245,128,128);") 删除
+    .modal.upload
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.modal-title 上传工艺单金属芯表
+                .modal-body
+                    .fa.fa-hand-o-right  &nbsp;&nbsp;  请上传符合模板格式的Excel数据文档.且后缀名为xls,xlsx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    span.btn.btn-success.fileinput-button
+                        i.glyphicon.glyphicon-plus
+                        span 浏览文件
+                        input#fileupload(type="file",name="file" multiple)
+                    br
+                    br
+                    .row
+                        .col-lg-11
+                            .progress#progress
+                                .progress-bar.progress-bar-success
+                        .col-lg-1#uploadAll(style="visibility:hidden")
+                            span.fa.fa-check
+                    .files#files
+                .modal-footer
+                    button.btn.btn-default(type="button",id="cancel2") 返回
+block page-js
+    script(src='/js/vendor/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js')
+    script(src='/js/vendor/plugins/jquery-file-upload/js/jquery.iframe-transport.js')
+    script(src='/js/vendor/plugins/jquery-file-upload/js/jquery.fileupload.js')
+    script(src='/js/vendor/bootstrap-datetimepicker2.js')
+    script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js')
+    script(src='/js/vendor/plugins/select2/select2.js')
+    script(src="/js/admin/gybjsx.js")
+                                                    

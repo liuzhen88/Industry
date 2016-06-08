@@ -1,0 +1,99 @@
+extends admin-layout
+
+block cust-css
+    link(rel='stylesheet', href='/css/jstree.style.css')
+
+block content
+    h3.page-title 表单管理
+    .row
+        .col-md-12
+            .portlet
+                .portlet-title
+                    .caption
+                        i.fa.fa-file
+                        | 现有表单管理
+                    .actions
+                        a#new.btn.default.yellow-stripe
+                            i.fa.fa-plus
+                            span.hidden-480 &nbsp;新表单
+                .portlet-body(style="display:none")
+                    form.form-horizontal(role="form")
+                        .dataTables_wrapper.no-footer
+                            table#tab-list-forms.edit-table.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                                thead
+                                    tr(role="row")
+                                        th(tabindex="0", width="10%", rowspan="1", colspan="1") 类型
+                                        th(tabindex="0", width="auto", rowspan="1", colspan="1") 名称
+                                        th(tabindex="0", width="15%", rowspan="1", colspan="1") 操作
+                                tbody
+    .modal.new
+        .modal-dialog(style="max-width:450px")
+            form.form-horizontal(role="form")
+                .modal-content
+                    .modal-header
+                        button.close(data-dismiss="modal")
+                        h4.modal-title 新表单
+                    .modal-body(style="overflow:hidden")
+                        .col-md-6
+                            .form-group(style="margin-right:0px")
+                                label.control-label 名称*
+                                input.form-control(name="name", type="text",placeholder="输入名称")
+                        .col-md-6
+                            .form-group(style="margin-right:-15px")
+                                label.control-label 类型*
+                                select#sel-type.form-control(name="type")
+                        .row#step(style="width:39%;margin-left:15px")
+                            .form-group(style="position:relative;top:-10px;margin-bottom:0px")
+                                #sel-step
+                                    label.control-label 工段/工序
+                                    input.form-control(name="step", type="text")
+                    .modal-footer
+                        button#cancel.btn.btn-default(data-dismiss="modal") 取消
+                        button#submit.btn.btn-primary 保存
+    .modal.add
+        .modal-dialog
+            form.form-horizontal(role="form")
+                .modal-content
+                    .modal-header
+                        button.close(data-dismiss="modal")
+                        h4.modal-title 添加数据
+                    .modal-body
+                        .row
+                            .col-md-5
+                                .form-group(style="margin-left:0px;margin-right:0px")
+                                    label.control-label 名称*
+                                    input.form-control(name="name", type="text",disabled)
+                                    label.control-label 类型
+                                    input.form-control(name="type", type="text",disabled)
+                                .form-group#modal(style="margin-left:0px;margin-right:0px;margin-top:-15px")
+                                    label.control-label 模板*
+                                    select#sel-modal.form-control(name="modal")
+                            .col-md-6#data
+                                label.control-label 数据
+                                #tree
+                                span
+                    .modal-footer
+                        button#cancel.btn.btn-default(data-dismiss="modal") 取消
+                        button#submit.btn.btn-primary 保存
+    .modal.view
+        .modal-dialog
+            form.form-horizontal(role="form")
+                .modal-content
+                    .modal-header
+                        button.close(data-dismiss="modal")
+                        h4.modal-title 查看表单
+                    .modal-body
+                        .form-group
+                            .col-md-5
+                                label.control-label 名称
+                                input.form-control(name="name", type="text",disabled)
+                                label.control-label 类型
+                                input.form-control(name="type", type="text",disabled)
+                            .col-md-6
+                                label.control-label 数据
+                                #tree
+                    .modal-footer
+                        button.btn.btn-default(data-dismiss="modal") 关闭
+block page-js
+    script(src='/js/vendor/jstree.min.js')
+    script(src="/js/admin/form.js")

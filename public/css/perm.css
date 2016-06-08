@@ -1,0 +1,52 @@
+.insevo-icon {
+    display: inline-block;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+    text-align: center;
+}
+
+.insevo-checkbox {
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-image: url("../image/32px.png");
+}
+
+.insevo-checkbox-unchecked {
+    background-position: -168px -8px;
+}
+
+.insevo-checkbox-unchecked:hover {
+    background-position: -168px -40px;
+}
+
+.insevo-checkbox-checked {
+    background-position: -232px -8px;
+}
+
+.insevo-checkbox-checked:hover {
+    background-position: -232px -40px;
+}
+
+.insevo-checkbox-undetermined {
+    background-position: -200px -8px;
+}
+
+.insevo-checkbox-undetermined:hover {
+    background-position: -200px -40px;
+}
+
+.insevo-checkbox-add {
+    background-position: -8px -8px;
+}
+
+.insevo-checkbox-delete {
+    background-position: -40px -8px;
+}
+
+
+
+

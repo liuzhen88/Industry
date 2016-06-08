@@ -1,0 +1,42 @@
+extends user-layout
+block cust-css
+    link(rel='stylesheet', href='/css/jstree.style.css')
+    link(rel='stylesheet', href='/css/toastr.css')
+
+block content
+    if displayForm
+        .row
+            .col-md-7
+                .portlet.light.bordered
+                    .portlet-title
+                        .caption
+                            span.caption-subject.font-green-sharp.bold.uppercase 机台列表
+                    .portlet-body
+                        .dataTables_wrapper.no-footer
+                            table#tab.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                                thead
+                                    tr(role="row")
+                                        th #
+                                        th(tabindex="0", rowspan="1", colspan="1") 机台号
+                                        th(tabindex="0", rowspan="1", colspan="1") 机台型号
+                                        th(tabindex="0", rowspan="1", colspan="1") 长度误差率
+            .col-md-5
+                .portlet.light.bordered(style="height:auto")
+                    .portlet-title
+                        .caption
+                            span.caption-subject.font-green-sharp.bold.uppercase 工单列表
+                            span.caption-helper
+                        .actions
+                            a.btn.btn-outline.btn-circle.expand.hidden(href="#")
+                                i.fa.fa-expand &nbsp;展开
+                            a.btn.btn-outline.btn-circle.compress.hidden(href="#")
+                                i.fa.fa-compress &nbsp;收起
+                    .portlet-body
+                        .jstree
+    else
+        .note.note-info
+            h4.block 您没有任何授权的表单。
+block cust-js
+    script(src='/js/vendor/jstree.js')
+    script(src="/js/user/machine_workorder.js")
+                            

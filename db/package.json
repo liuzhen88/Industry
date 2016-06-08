@@ -1,0 +1,8 @@
+{
+  "name": "db-load-script",
+  "version": "0.0.1",
+  "dependencies": {
+    "async": "^1.4.2",
+    "mongodb": "^2.0.45"
+  }
+}

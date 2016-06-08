@@ -1,0 +1,219 @@
+extends user-layout
+block cust-css
+  link(rel='stylesheet', href='/css/jstree.style.css')
+  link(rel='stylesheet', href='/css/toastr.css')
+  link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+  style
+    | .table > thead > tr > th{text-align:center;}
+    | .table > tbody > tr > td{text-align:center;}
+block content
+  if displayForm
+    .row.general-action(class=displayForm.perms ? "hidden" : "")
+      .col-md-6.form-card(id=displayForm._id)
+        .well
+          .col-md-8
+            input.form-control.mach-no(type="text")
+          .col-md-4
+            button.btn.btn-primary.scan 扫描机台选择工单
+          .clearfix
+      .col-md-6
+        .well.action-right.hidden
+    .row
+      .col-md-12
+        .portlet.light.bordered
+          .portlet-title
+            .caption
+              span.caption-subject.font-green-sharp.bold.uppercase= displayForm.name + " - 表单实例"
+            .actions
+              a.btn.btn-circle.btn-danger.confirmBtn(href="#",class=(displayForm.perms && !displayForm.perms.operate)?"disabled":"")
+                i.fa.fa-arrow-circle-up 审核并提交
+              a.btn.btn-circle.btn-primary.btn-sm.addOrder(href="#",class=(displayForm.perms && !displayForm.perms.operate)?"disabled":"")
+                i.fa.fa-plus 添加
+          .portlet-body
+            .dataTables_wrapper.no-footer
+              table#tab.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                thead
+                  tr(role="row")
+                    th.sorting #
+                    th.sorting 订单号
+                    th.sorting 订货单位
+                    th.sorting 订单类型
+                    th.sorting 客户代码
+                    th.sorting 下/接单日期
+                    th.sorting 状态
+                    th.sorting 备注
+                    th.sorting 操作
+    .row
+      .col-md-12
+        .portlet.light.bordered
+          .portlet-title
+            .caption
+              span#detailSpan.caption-subject.font-green-sharp.bold.uppercase= displayForm.name + " - 明细"
+              input(type="hidden",id="detailDdh")
+            .actions
+              a.btn.btn-circle.btn-primary.btn-sm.addDetail(href="#",class=(displayForm.perms && !displayForm.perms.operate)?"disabled":"",disabled="true")
+                i.fa.fa-plus 添加
+          #detail.portlet-body
+            span 选择订单，查看明细。
+        .modal.new
+          .modal-dialog
+            form#form.form-horizontal(method="POST", action="user/createPrdOrd", role="form")
+              .modal-content
+                .modal-header
+                  h4.modal-title 新生产订单
+                .modal-body
+                  .form-group
+                    .col-md-12
+                      label.control-label 表单编号
+                      input.form-control(name="form_no", type="text")
+                  .form-group
+                    .col-md-6
+                      label.control-label 制表
+                      input.form-control(name="author", type="text")
+                    .col-md-6
+                      label.control-label 制表日期
+                      input.form-control(name="created", type="text", date="true")
+                  .form-group.hidden.audit
+                    .col-md-6
+                      label.control-label 审核
+                      input.form-control(name="auditor", type="text", disabled)
+                    .col-md-6
+                      label.control-label 审核日期
+                      input.form-control(name="audit_date", type="text", date="true", disabled)
+                  .form-group
+                    .col-md-6
+                      label.control-label 订单号
+                      input.form-control(name="ddh", type="text")
+                    .col-md-6
+                      label.control-label 订货单位
+                      input.form-control(name="dhdw", type="text")
+                  .form-group
+                    .col-md-4
+                      label.control-label 订单类型
+                      input.form-control(name="ddlx", type="text")
+                    .col-md-4
+                      label.control-label 客户代码
+                      input.form-control(name="khdm", type="text")
+                    .col-md-4
+                      label.control-label 下/接单日期
+                      input.form-control(name="xjdrq", type="text" ,date="true")
+                  .form-group
+                    .col-md-12
+                      label.control-label 备注
+                      textarea.form-control(name="bz", row="3")
+                .modal-footer
+                  input(type="hidden",id="user",name=user.name)
+                  button.btn.btn-default(type="button",id="cancel", data-dismiss="modal") 取消
+                  button.save.btn.btn-primary(type="button",id="submit",disabled=(displayForm.perms && !displayForm.perms.operate)) 保存
+                  button.save.btn.yellow(type="button",id="update",disabled=(displayForm.perms && !displayForm.perms.operate)) 修改
+                  button.btn.red(id="delete",style="position:absolute;left:10px;bottom:15px;background-color:rgb(245,128,128);",disabled= (displayForm.perms && !displayForm.perms.operate)) 删除
+        .modal.new2
+          .modal-dialog
+            form#form2.form-horizontal(method="POST", action="", role="form")
+              .modal-content
+                .modal-header
+                  h4.modal-title 新订单明细
+                .modal-body
+                  input(type="hidden",name="cpbh")
+                  .form-group
+                    .col-md-3
+                      label.control-label(style="margin-bottom:8px") 新建订单类型
+                      select.form-control#selectType
+                        option(name="gss") 钢丝绳
+                        option(name="g") 股
+                        option(name="cps") 成品丝
+                    .col-md-3
+                      label.control-label 产品类别
+                      .radio-list
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        label.radio-inline
+                          input(type="radio", name="product_category", value="光面")
+                          | 光面
+                        label.radio-inline
+                          input(type="radio", name="product_category", value="镀锌")
+                          | 镀锌
+                    .col-md-3
+                      label.control-label 用途
+                      input.form-control(name="purpose", type="text")
+                    .col-md-3#ggType
+                      label.control-label 规格
+                      input.form-control(name="spec", type="text")
+                    #jsx_spec.col-md-3.hidden
+                      label.control-label 金属芯规格
+                      input.form-control(name="jsx_spec", type="text")
+                  .form-group
+                    .col-md-3
+                      label.control-label 直径(mm)
+                      input.form-control(name="diameter", type="text")
+                    .col-md-3
+                      label.control-label 单件米长(m)
+                      input.form-control(name="length", type="text")
+                    .col-md-3
+                      label.control-label 件数
+                      input.form-control(name="count", type="text")
+                    .col-md-3
+                      label.control-label 参考重量
+                      input.form-control(name="est_weight", type="text", disabled)
+                  .form-group
+                    .col-md-3
+                      label.control-label 强度
+                      input.form-control(name="strength", type="text")
+                    .col-md-3#nxType
+                      label.control-label 捻向
+                      input.form-control(name="direction", type="text")
+                    .col-md-6
+                      label.control-label 涂油方式
+                      input.form-control(name="oil_method", type="text")
+                  .form-group
+                    .col-md-6
+                      label.control-label 紧急程度
+                      .radio-list
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        label.radio-inline
+                          input(type="radio", name="urgency", value="特急")
+                          | 特急
+                        label.radio-inline
+                          input(type="radio", name="urgency", value="急")
+                          | 急
+                        label.radio-inline
+                          input(type="radio", name="urgency", value="一般")
+                          | 一般
+                    .col-md-6
+                      label.control-label 是否定制
+                      .radio-list
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        label.radio-inline
+                          input(type="radio", name="is_customized", value="是")
+                          | 是
+                        label.radio-inline
+                          input(type="radio", name="is_customized", value="否")
+                          | 否
+                  .form-group
+                    .col-md-4
+                      label.control-label 交货日期
+                      input.form-control(name="ship_date", type="text",date="true")
+                    .col-md-4
+                      label.control-label 质量要求与技术标准
+                      input.form-control(name="quality_spec", type="text")
+                    .col-md-4
+                      label.control-label 包装方式
+                      input.form-control(name="package_method", type="text")
+                  .form-group
+                    .col-md-12
+                      label.control-label 特殊要求
+                      textarea.form-control(name="special_need", row="3")
+                .modal-footer
+                  button.btn.btn-default(type="button",id="cancel2", data-dismiss="modal") 取消
+                  button.save.btn.btn-primary(type="button",id="submit2",disabled=(displayForm.perms && !displayForm.perms.operate)) 保存
+                  button.save.btn.yellow(type="button",id="update2",disabled=(displayForm.perms && !displayForm.perms.operate)) 修改
+                  button.btn.red(id="delete2" type="button" style="position:absolute;left:10px;bottom:15px;background-color:rgb(245,128,128);",disabled=(displayForm.perms && !displayForm.perms.operate)) 删除
+  else
+    .note.note-info
+      h4.block 您没有任何授权的表单。
+block cust-js
+  script(src='/js/vendor/jstree.js')
+  script(src='/js/vendor/toastr.min.js')
+  script(src='/js/vendor/bootstrap-datetimepicker2.js')
+  script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js')
+  script(src='/js/vendor/plugins/select2/select2.js')
+  script(src='/js/user/order.js')

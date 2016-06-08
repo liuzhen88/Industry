@@ -1,0 +1,35 @@
+//
+   Created by 王天宇 on 2015/10/20.
+
+extends admin-layout
+block cust-css
+   link(rel='stylesheet', href='/css/bootstrap-datetimepicker2.css')
+   link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+block content
+   h3.page-title 工段制造号映射表
+   .row
+   .col-md-12
+      .portlet
+         .portlet-title
+            .note.note-success
+               | 现有工段制造号映射关系
+         .portlet-body
+            //TODO
+            form.form-horizontal
+               .form-group
+                  label.control-label.col-md-1(for="gd") 工段制造号: &nbsp;&nbsp;
+                  .col-md-11
+                     div#gd
+
+               .form-group
+                  label.control-label.col-md-1(for="makeNo") 产品编号: &nbsp;&nbsp;
+                  .col-md-11
+                     select.form-control#makeNo(multiple,style="width:400px")
+
+
+
+block page-js
+   script(src='/js/vendor/bootstrap-datetimepicker2.js')
+   script(src='/js/vendor/bootstrap-datetimepicker.zh-CN.js')
+   script(src='/js/vendor/plugins/select2/select2.js')
+   script(src="/js/admin/gdzzhysb.js")

@@ -1,0 +1,193 @@
+extends user-layout
+block cust-css
+    link(rel='stylesheet', href='/css/toastr.css')
+
+block content
+ if displayForm
+    .row.main
+      .col-md-12
+         .portlet.light.bordered
+            .portlet-title
+                .caption
+                   .caption-subject.font-green-sharp.bold.uppercase 股库表管理
+                .actions
+                    - if (displayForm.perms && displayForm.perms.operate)
+                      a.btn-new.btn.default.yellow-stripe(href="#")
+                        i.fa.fa-plus
+                        span.hidden-480 &nbsp;新股库
+            .portlet-body
+                .dataTables_wrapper.no-footer
+                    table#tab.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                        thead
+                            tr(role="row")
+                                th #
+                                th 工字轮编号
+                                th 工字轮型号
+                                th 工段制造号
+                                th 是否定制
+                                th 车间
+                                th 机台号
+                                th 班组
+                                th 班长
+                                th 操作工
+                                th 类别
+                                th 是否是中间品
+                                th 结构
+                                th 直径
+                                th 捻向
+                                th 强度
+                                th 涂油方式
+                                th 捻距
+                                th 表面状态
+                                th 特殊要求
+                                th 段长
+                                th 段数
+                                th 单件米长
+                                th 重量
+                                th 入库时间
+                                th 出库时间
+                                th 备注
+                                th 质检员
+                                th 质检时间
+                                th 是否合格
+                                th 不合格原因
+                                th 操作
+         .modal.new
+            .modal-dialog
+                form.form-horizontal(method="POST", action="createGVirtualLibrary", role="form")
+                    .modal-content
+                        .modal-header
+                            h4.modal-title 新股库
+                        .modal-body
+                            .form-group
+                                .col-md-3
+                                    label.control-label 工字轮编号
+                                    input.form-control(name="gzlbh", type="text")
+                                .col-md-3
+                                    label.control-label 工字轮型号
+                                    input.form-control(name="gzlxh", type="text")
+                                .col-md-3
+                                    label.control-label 工段制造号
+                                    input.form-control(name="gdzzh", type="text")
+                                .col-md-3
+                                    label.control-label 是否定制
+                                    .radio-list(style="margin-left:20px")
+                                        label.radio-inline
+                                            input(type="radio", name="sfdz", value="已定制")
+                                            | 是
+                                        label.radio-inline
+                                            input(type="radio", name="sfdz", value="未定制")
+                                            | 否
+                            .form-group
+                                .col-md-3
+                                    label.control-label 车间
+                                    input.form-control(name="cj", type="text")
+                                .col-md-4
+                                    label.control-label 机台号
+                                    select.form-control(name="jth", type="text")
+                            .mul
+                                .bzz.bzz1
+                                    .form-group.czg.czg1
+                                       .col-md-5
+                                          label.control-label(style="margin-right:5%") 班长
+                                          .fa.fa-plus.bzz-plus(bzz="1")
+                                          select#sel-bzz.form-control(name="bzz1", type="text")
+                                       .col-md-4
+                                          label.control-label(style="margin-right:5%") 操作工
+                                          .fa.fa-plus.czg-plus(bzz="1",czg="1")
+                                          select#sel-czg.form-control(name="bzz1_czg1", type="text")
+                            .form-group
+                                .col-md-3
+                                    label.control-label 类别
+                                    input.form-control(name="lb", type="text")
+                                .col-md-3
+                                    label.control-label 是否是中间品
+                                    .radio-list(style="margin-left:20px")
+                                        label.radio-inline
+                                            input(type="radio", name="isZjp", value="是")
+                                            | 是
+                                        label.radio-inline
+                                            input(type="radio", name="isZjp", value="否")
+                                            | 否
+                                .col-md-3
+                                    label.control-label 结构
+                                    input.form-control(name="jg", type="text")
+                                .col-md-3
+                                    label.control-label 直径
+                                    input.form-control(name="zj", type="text")
+                            .form-group
+                                .col-md-3
+                                    label.control-label 捻向
+                                    input.form-control(name="nx", type="text")
+                                .col-md-3
+                                    label.control-label 强度
+                                    input.form-control(name="qd", type="text")
+                                .col-md-3
+                                    label.control-label 涂油方式
+                                    input.form-control(name="tyfs", type="text")
+                                .col-md-3
+                                    label.control-label 捻距
+                                    input.form-control(name="nj", type="text")
+                            .form-group
+                                .col-md-3
+                                    label.control-label 表面状态
+                                    input.form-control(name="bmzt", type="text")
+                                .col-md-3
+                                    label.control-label 特殊要求
+                                    input.form-control(name="tsyq", type="text")
+                                .col-md-3
+                                    label.control-label 段长
+                                    input.form-control(name="dc", type="text")
+                                .col-md-3
+                                    label.control-label 段数
+                                    input.form-control(name="ds", type="text")
+                            .form-group
+                                .col-md-3
+                                    label.control-label 单件米长
+                                    input.form-control(name="djmc", type="text")
+                                .col-md-3
+                                    label.control-label 重量
+                                    input.form-control(name="zl", type="text")
+                            .form-group
+                                .col-md-4
+                                    label.control-label 入库时间
+                                    input.form-control(name="rksj", type="text")
+                                .col-md-4
+                                    label.control-label 出库时间
+                                    input.form-control(name="cksj", type="text")
+                            .form-group
+                                .col-md-12
+                                    label.control-label 评论
+                                    textarea.form-control(name="comment")
+                            .form-group
+                                .col-md-4
+                                    label.control-label 质检员
+                                    select#sel-zjy.form-control(name="zjy", type="text")
+                                .col-md-4
+                                    label.control-label 质检时间
+                                    input.form-control(name="zjsj", type="text")
+                                .col-md-3
+                                    label.control-label 是否合格
+                                    .radio-list(style="margin-left:20px")
+                                        label.radio-inline
+                                            input(type="radio", name="sfhg", value="合格")
+                                            | 是
+                                        label.radio-inline
+                                            input(type="radio", name="sfhg", value="不合格")
+                                            | 否
+                            .form-group.bhgyy
+                                .col-md-12
+                                    label.control-label 不合格原因
+                                    textarea.form-control(name="bhgyy")
+                        .modal-footer
+                            button.btn.btn-default(type="button",id="cancel", data-dismiss="modal") 取消
+                            - if (displayForm.perms && displayForm.perms.operate)
+                             button.save.btn.btn-primary(type="submit",id="submit") 保存
+                             button.save.btn.yellow(type="button",id="update") 修改
+                             button.btn.red(id="delete" style="position:absolute;left:10px;bottom:15px;background-color:rgb(245,128,128);") 删除
+ else
+      .note.note-info
+          h4.block 您没有任何授权的表单。
+block cust-js
+    script(src="/js/user/g_virtual_library.js")
+                            

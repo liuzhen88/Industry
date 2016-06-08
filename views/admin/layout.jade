@@ -1,0 +1,88 @@
+doctype html
+html
+    head
+        title inKanban - 易恒智行
+        meta(http-equiv="X-UA-Compatible",content="IE=8")
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='/css/font-awesome.css')
+        link(rel='stylesheet', href='/css/simple-line-icons.min.css')
+        link(rel='stylesheet', href='/css/bootstrap.css')
+        //link(rel='stylesheet', href='/css/uniform.default.css')
+        link(rel='stylesheet', href='/css/formValidation.css')
+        link(rel='stylesheet', href='/css/components.css')
+        link(rel='stylesheet', href='/css/plugins.css')
+        link(rel='stylesheet', href='/css/layout.css')
+        link(rel='stylesheet', href='/css/default.css')
+        link(rel='stylesheet', href='/css/dataTables.bootstrap.css')
+        link(rel='stylesheet', href='/css/style.css')
+        link(rel='stylesheet', href='/css/toastr.css')
+        link(rel='stylesheet', href='/css/perm.css')
+        link(rel='stylesheet', href='/css/bootstrap-editable.css')
+        link(rel='stylesheet', href='/css/jquery-labelauty.css')
+        link(rel='stylesheet', href='/css/form.css')
+        link(rel='stylesheet', href='/js/vendor/plugins/select2/select2.css')
+        link(rel='stylesheet', href='/css/plugins.css')
+
+        block cust-css
+
+    body.page-header-fixed.page-quick-sidebar-over-content.page-style-square
+        .page-header.navbar.navbar-fixed-top
+            .page-header-inner
+                .page-logo
+                    a(href="#")
+                        img.logo-default(src="/image/logo.png", width="100px")
+                    .menu-toggler.sidebar-toggler
+                a.menu-toggler.responsive-toggler(href="javascript:;", data-toggle="collapse", data-target=".navbar-collapse")
+                .top-menu
+                    if user
+                        ul.nav.navbar-nav.pull-right
+                            li.dropdown.dropdown-user
+                                a.dropdown-toggle(href="#", data-toggle="dropdown", data-hover="dropdown", data-close-others="true")
+                                    span.username.username-hide-on-mobile= user.name
+                                    i.fa.fa-angle-down
+                                ul.dropdown-menu.dropdown-menu-default
+                                    li
+                                        a.logout(href="#") 退出
+        .clearfix
+        .page-container
+            .page-sidebar-wrapper
+                .page-sidebar.navbar-collapse.collapse
+                    ul.page-sidebar-menu(data-keep-expanded="false", data-auto-scroll="true", data-slide-speed="200")
+                        block sidebar-menu
+            .page-content-wrapper
+                .page-content
+                    block content
+        .page-footer
+            .page-footer-inner 2015 © 易恒智行
+                span.build-number
+
+        #error-alert.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title 错误
+                    .modal-body
+                        p.error-message
+                    .modal-footer
+                        button#alert-ok.btn.btn-primary(type="button", data-dismiss="modal") 确定
+        script(src='/js/vendor/jquery-1.11.3.js')
+        script(src='/js/vendor/bootstrap.js')
+        script(src='/js/vendor/formValidation.popular.js')
+        script(src='/js/vendor/fv-bootstrap.js')
+        script(src='/js/vendor/moment-with-locales.min.js')
+        //script(src='/js/vendor/jquery.uniform.min.js')
+        script(src='/js/vendor/metronic.js')
+        script(src='/js/vendor/layout.js')
+        script(src="/js/vendor/jquery.dataTables.min.js")
+        script(src="/js/vendor/bootstrap-editable.min.js")
+        script(src="/js/vendor/dataTables.bootstrap.js")
+        script(src="/js/vendor/jquery-labelauty.js")
+        script(src='/js/vendor/bootbox.min.js')
+        script(src='/js/vendor/toastr.min.js')
+        script(src='/js/vendor/plugins/select2/select2.min.js')
+        script(src='/js/vendor/plugins/select2/select2_locale_zh-CN.js')
+        script(src='/js/mes-util.js')
+
+    block cust-js
+
+    block page-js

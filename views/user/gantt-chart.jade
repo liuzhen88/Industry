@@ -1,0 +1,33 @@
+extends user-layout
+
+block cust-css
+    link(rel='stylesheet' href='/js/vendor/plugins/dhtmlxGantt_v3.3.0/codebase/dhtmlxgantt.css')
+
+block content
+    .row.main
+        .col-md-12
+            .portlet.light.bordered
+                .portlet-title
+                    .caption
+                        .caption-subject.font-green-sharp.bold.uppercase 甘特图
+                .portlet-body
+                        .form-group
+                           .col-md-3(style="margin-left:-15px;margin-bottom:15px")
+                               label.control-label(for="sel-role") 订单:
+                               select#sel-order.form-control(name="roles")
+                           .col-md-3(style="margin-left:-15px;margin-bottom:15px")
+                               label.control-label(for="sel-role") 视图:
+                               select#sel-view.form-control(name="roles")
+                                  option(value="year") 年视图
+                                  option(value="month") 月视图
+                                  option(value="week") 周视图
+                                  option(value="day", selected) 日视图
+                        #gantt(style='width:100%;height:400px;background-color:white;overflow:hidden;')
+block cust-js
+    script(src='/js/vendor/plugins/dhtmlxGantt_v3.3.0/codebase/dhtmlxgantt.js')
+    script(src='/js/vendor/plugins/dhtmlxGantt_v3.3.0/codebase/locale/locale_cn.js')
+    script(src='/js/vendor/plugins/dhtmlxGantt_v3.3.0/codebase/ext/dhtmlxgantt_tooltip.js')
+    script(src='/js/vendor/plugins/dhtmlxGantt_v3.3.0/codebase/ext/dhtmlxgantt_marker.js')
+    script(src='/js/vendor/plugins/dhtmlxGantt_v3.3.0/codebase/ext/dhtmlxgantt_fullscreen.js')
+    script(src='/js/user/gantt.js')
+

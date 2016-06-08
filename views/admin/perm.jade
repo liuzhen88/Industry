@@ -1,0 +1,32 @@
+extends admin-layout
+
+block content
+    h3.page-title 用户权限管理
+    .row
+        .col-md-12
+            .portlet
+                .portlet-title
+                    .caption
+                        i.fa.fa-lock
+                        | 分配权限
+                .portlet-body(style="display:none")
+                    .form-group
+                        .col-md-3(style="margin-left:-15px;margin-bottom:20px")
+                            label.control-label(for="sel-role") 角色:
+                            select#sel-role.form-control(name="roles")
+                              option(value="", disabled selected)
+                        .col-md-3(style="width:26%")
+                            label.control-label(for="sel-user") 用户:
+                            select#sel-user.form-control(name="user")
+                        button.btn(id="cancel",style="float:right;position:relative;top:25px;margin-left:5px;" +
+                            "display:none") 取消
+                        button.btn.btn-primary(id="submit",style="float:right;position:relative;top:25px;display:none") 保存
+                        button.btn.yellow(id="edit",style="float:right;position:relative;top:25px;display:none") 编辑
+                    form.form-horizontal(role="form")
+                        .dataTables_wrapper.no-footer
+                            table#tab-list-perms.table.table-striped.table-hover.table-bordered.dataTable.no-footer(role="grid")
+                                thead
+                                    tr(role="row")
+                                tbody
+block page-js
+    script(src="/js/admin/perm.js")

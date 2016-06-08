@@ -1,0 +1,75 @@
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.form-signin .form-control {
+    margin-bottom: 10px;
+}
+
+.error-msg h1 {
+    margin-top: 10px;
+}
+
+form {
+    margin-top: 10px;
+}
+
+.orderlist {
+    margin-top: 20px;
+}
+
+th.action {
+    width: 10%;
+    font-weight: lighter;
+}
+
+/* customized js tree styles */
+.jstree-node {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* end of customized js tree styles */
+
+.tree-container {
+    padding-right: 15px;
+}
+
+.tree-container .row {
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.form-modal {
+    width: 680px;
+}
+
+.permissions > .form-group > div {
+    padding-left: 5px;
+}
+
+/* Metronics customization */
+
+.page-header.navbar .page-logo .logo-default {
+    margin-top: 8px;
+}
+
+.page-footer-inner {
+    width: 100%;
+    text-align: center;
+}
+
+.build-number {
+    font-width: 300;
+    margin-left: 20px;
+}
+
+.checkbox-list > label.checkbox-inline:first-child, .radio-list > label.radio-inline:first-child {
+    padding-left: 20px !important;
+}
